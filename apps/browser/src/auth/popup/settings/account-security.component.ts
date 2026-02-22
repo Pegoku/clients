@@ -622,6 +622,7 @@ export class AccountSecurityComponent implements OnInit, OnDestroy {
         );
         let result = false;
         try {
+          await this.biometricsService.setupBiometricsForUser(userId);
           const userKey = await this.biometricsService.unlockWithBiometricsForUser(userId);
           result = await this.keyService.validateUserKey(userKey, userId);
           // FIXME: Remove when updating file. Eslint update

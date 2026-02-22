@@ -198,6 +198,9 @@ export default class RuntimeBackground {
       case BiometricsCommands.UnlockWithBiometricsForUser: {
         return await this.main.biometricsService.unlockWithBiometricsForUser(msg.userId);
       }
+      case BiometricsCommands.SetupBiometricsForUser: {
+        return await this.main.biometricsService.setupBiometricsForUser(msg.userId);
+      }
       case BiometricsCommands.GetBiometricsStatusForUser: {
         return await this.main.biometricsService.getBiometricsStatusForUser(msg.userId);
       }

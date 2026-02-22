@@ -119,6 +119,28 @@ export class BackgroundBrowserBiometricsService extends BiometricsService {
     return null;
   }
 
+  async setupBiometricsForUser(userId: UserId): Promise<boolean> {
+    try {
+      await this.ensureConnected();
+
+      const userKey = await this.keyService.getUserKey(userId);
+      if (userKey == null) {
+        return false;
+      }
+
+      const response = await this.nativeMessagingBackground().callCommand({
+        command: BiometricsCommands.SetupBiometricsForUser,
+        userId,
+        userKeyB64: userKey.keyB64,
+      });
+
+      return !!response?.response;
+    } catch (e) {
+      this.logService.info("Biometric setup for user failed", e);
+      return false;
+    }
+  }
+
   async getBiometricsStatusForUser(id: UserId): Promise<BiometricsStatus> {
     try {
       await this.ensureConnected();

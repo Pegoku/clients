@@ -43,6 +43,15 @@ export class ForegroundBrowserBiometricsService extends BiometricsService {
     return SymmetricCryptoKey.fromString(response.result.keyB64) as UserKey;
   }
 
+  async setupBiometricsForUser(userId: UserId): Promise<boolean> {
+    const response = await BrowserApi.sendMessageWithResponse<{
+      result: boolean;
+      error: string;
+    }>(BiometricsCommands.SetupBiometricsForUser, { userId });
+
+    return !!response?.result;
+  }
+
   async getBiometricsStatusForUser(id: UserId): Promise<BiometricsStatus> {
     const response = await BrowserApi.sendMessageWithResponse<{
       result: BiometricsStatus;
