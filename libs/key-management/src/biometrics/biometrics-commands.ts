@@ -7,6 +7,8 @@ export enum BiometricsCommands {
   GetBiometricsStatus = "getBiometricsStatus",
   /** Perform biometric authentication for the system's user for the given bitwarden account's credentials. This returns cryptographic material that can be used to unlock the vault. */
   UnlockWithBiometricsForUser = "unlockWithBiometricsForUser",
+  /** Enroll or refresh biometric unlock material for a user account. */
+  SetupBiometricsForUser = "setupBiometricsForUser",
   /** Get biometric status for a specific user account. This includes both information about availability of cryptographic material (is the user configured for biometric unlock? is a masterpassword unlock needed? But also information about the biometric system's availability in a single status) */
   GetBiometricsStatusForUser = "getBiometricsStatusForUser",
 

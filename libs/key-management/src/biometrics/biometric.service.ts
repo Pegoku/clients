@@ -31,6 +31,14 @@ export abstract class BiometricsService {
   abstract unlockWithBiometricsForUser(userId: UserId): Promise<UserKey | null>;
 
   /**
+   * Allows native platforms to enroll/refresh user-specific biometric unlock material.
+   * Default implementation is a no-op for platforms that do not need explicit setup.
+   */
+  async setupBiometricsForUser(_userId: UserId): Promise<boolean> {
+    return true;
+  }
+
+  /**
    * Gets the status of biometrics for a current user. This includes system states (hardware unavailable) but also user specific states (needs unlock with master-password).
    * @param userId the user to check the biometrics status for
    * @returns the status of biometrics for the user
